@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report with Current Day and Year</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        header, section, footer {
+            margin-bottom: 20px;
+        }
+    </style>
+    <!-- Include the html2pdf.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+    <header>
+        <h1>Report Title</h1>
+        <p><strong>Author:</strong> Road Report</p>
+        <p><strong>Date:</strong> <span id="currentDay"></span>, <span id="currentYear"></span></p>
+    </header>
+
+    <section>
+        <h2>Reports as of Today</h2>
+        <p>
+            This report presents data and analysis for the current year. All information is up-to-date as of today.
+        </p>
+    </section>
+    <section2>
+        <h2>Report #1</h2>
+        <p>
+            A pot hole has been reported near Sterling Heights, Michigan, with a severity of 5
+        </p>
+    </section2>
+
+    <section3>
+        <h2>Report #2</h2>
+        <p>
+            A pot hole has been reported near Warren, Michigan, with a severity of 2
+        </p>
+    </section3>
+
+    <footer>
+        <p>Generated on <span id="currentDayFooter"></span>, <span id="currentYearFooter"></span>.</p>
+    </footer>
+
+    <button id="download">Download PDF</button>
+
+    <script>
+        // Get the current date
+        const today = new Date();
+
+        // Extract the day and year
+        const day = today.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+        const year = today.getFullYear();
+
+        // Format date for filename
+        const dateString = today.toISOString().split('T')[0]; // YYYY-MM-DD format
+
+        // Insert day and year into the HTML
+        document.getElementById('currentDay').textContent = day;
+        document.getElementById('currentYear').textContent = year;
+
+        // Insert day and year into the footer
+        document.getElementById('currentDayFooter').textContent = day;
+        document.getElementById('currentYearFooter').textContent = year;
+
+        // Function to download PDF
+        document.getElementById('download').addEventListener('click', () => {
+            // Select the element to convert to PDF
+            const element = document.body;
+
+            // Use html2pdf to generate PDF
+            html2pdf()
+                .from(element)
+                .save(`report-${dateString}.pdf`); // Name the PDF file with current date
+        });
+    </script>
+
+</body>
+</html>
