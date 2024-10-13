@@ -7,12 +7,12 @@ const Login = () => {
     const [credentials, setCredentials] = useState({ username: '', password: '' });
     const router = useRouter();
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setCredentials(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         
         // Log the attempt (you can remove this in production)
@@ -58,21 +58,22 @@ const styles = {
         justifyContent: 'center',
         height: '100vh',
         fontFamily: 'Arial, sans-serif',
-    },
+    } as React.CSSProperties,
     title: {
         marginBottom: '20px',
-        fontSize: '2rem',
-        fontWeight: 'bold',
+        fontSize: '2rem', // Increased font size
+        fontWeight: 'bold', // Made the font bold
     },
     form: {
         display: 'flex',
         flexDirection: 'column',
         width: '300px',
-    },
+    } as React.CSSProperties,
     input: {
         margin: '10px 0',
         padding: '10px',
         fontSize: '16px',
+        color: 'black',
     },
     button: {
         margin: '20px 0',
